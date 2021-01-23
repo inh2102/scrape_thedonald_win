@@ -1,34 +1,4 @@
-url <- 'http://thedonald.win'
 url <- 'http://patriots.win'
-library(RSelenium)
-library(rvest)
-library(tidyverse)
-
-remDr <- remoteDriver(
-    remoteServerAddr = "localhost",
-    port = 4445L,
-    browserName = "firefox"
-  )
-remDr$open(silent=TRUE)
-cat("Navigating to TheDonald.win, please wait...")
-remDr$navigate(url)
-
-cat("Grabbing page contents...")
-  #
-scrolls <- 100
-
-for(i in 1:scrolls){
-    remDr$executeScript(paste("scroll(0,",i*10000,");"))
-    Sys.sleep(3)
-    cat(paste0('\n[',i," scroll(s) completed...]\n"))
-}
-  #
-
-post_links <- url %>% read_html() %>%
-    html_nodes(".title") %>%
-    html_attr("href") %>% tibble()
-
-## github
 
 library(tidyverse)
 library(tidytext)
